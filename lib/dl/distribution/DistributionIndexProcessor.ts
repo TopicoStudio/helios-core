@@ -116,7 +116,7 @@ export class DistributionIndexProcessor extends IndexProcessor {
 
     // TODO Move this to a util maybe
     public static isForgeGradle3(mcVersion: string, forgeVersion: string): boolean {
-        return true
+        return false
 
         // if(mcVersionAtLeast('1.13', mcVersion)) {
         //     return true

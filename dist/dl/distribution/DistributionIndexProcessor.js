@@ -98,7 +98,7 @@ class DistributionIndexProcessor extends IndexProcessor_1.IndexProcessor {
     }
     // TODO Move this to a util maybe
     static isForgeGradle3(mcVersion, forgeVersion) {
-        return true;
+        return false;
         // if(mcVersionAtLeast('1.13', mcVersion)) {
         //     return true
         // }
