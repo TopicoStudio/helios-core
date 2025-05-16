@@ -66,6 +66,7 @@ class DistributionIndexProcessor extends IndexProcessor_1.IndexProcessor {
         if (server == null) {
             throw new AssetGuardError_1.AssetGuardError(`Invalid server id ${this.serverId}`);
         }
+        console.log(server.modules);
         const modLoaderModule = server.modules.find(({ rawModule: { type } }) => type === helios_distribution_types_1.Type.ForgeHosted || type === helios_distribution_types_1.Type.Forge || type === helios_distribution_types_1.Type.Fabric);
         if (modLoaderModule == null) {
             throw new AssetGuardError_1.AssetGuardError('No mod loader found!');
