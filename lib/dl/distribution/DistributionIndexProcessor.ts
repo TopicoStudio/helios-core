@@ -116,31 +116,32 @@ export class DistributionIndexProcessor extends IndexProcessor {
 
     // TODO Move this to a util maybe
     public static isForgeGradle3(mcVersion: string, forgeVersion: string): boolean {
+        return true
 
-        if(mcVersionAtLeast('1.13', mcVersion)) {
-            return true
-        }
+        // if(mcVersionAtLeast('1.13', mcVersion)) {
+        //     return true
+        // }
 
-        try {
+        // try {
             
-            const forgeVer = forgeVersion.split('-')[1]
+        //     const forgeVer = forgeVersion.split('-')[1]
 
-            const maxFG2 = [14, 23, 5, 2847]
-            const verSplit = forgeVer.split('.').map(v => Number(v))
+        //     const maxFG2 = [14, 23, 5, 2847]
+        //     const verSplit = forgeVer.split('.').map(v => Number(v))
 
-            for(let i=0; i<maxFG2.length; i++) {
-                if(verSplit[i] > maxFG2[i]) {
-                    return true
-                } else if(verSplit[i] < maxFG2[i]) {
-                    return false
-                }
-            }
+        //     for(let i=0; i<maxFG2.length; i++) {
+        //         if(verSplit[i] > maxFG2[i]) {
+        //             return true
+        //         } else if(verSplit[i] < maxFG2[i]) {
+        //             return false
+        //         }
+        //     }
         
-            return false
+        //     return false
 
-        } catch(err) {
-            throw new Error('Forge version is complex (changed).. launcher requires a patch.')
-        }
+        // } catch(err) {
+        //     throw new Error('Forge version is complex (changed).. launcher requires a patch.')
+        // }
     }
 
 }
