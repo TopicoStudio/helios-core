@@ -10,6 +10,7 @@ const AssetGuardError_1 = require("../AssetGuardError");
 const FileUtils_1 = require("../../common/util/FileUtils");
 const Asset_1 = require("../Asset");
 const helios_distribution_types_1 = require("helios-distribution-types");
+const MojangUtils_1 = require("../../common/util/MojangUtils");
 const fs_extra_1 = require("fs-extra");
 const node_stream_zip_1 = __importDefault(require("node-stream-zip"));
 const path_1 = require("path");
@@ -71,7 +72,7 @@ class DistributionIndexProcessor extends IndexProcessor_1.IndexProcessor {
         if (modLoaderModule == null) {
             throw new AssetGuardError_1.AssetGuardError('No mod loader found!');
         }
-        if (modLoaderModule.rawModule.type === helios_distribution_types_1.Type.Fabric
+        if (modLoaderModule.rawModule.type === helios_distribution_types_1.Type.Fabric || modLoaderModule.rawModule.type == helios_distribution_types_1.Type.Neoforge
             || DistributionIndexProcessor.isForgeGradle3(server.rawServer.minecraftVersion, modLoaderModule.getMavenComponents().version)) {
             return await this.loadVersionManifest(modLoaderModule);
         }
@@ -98,25 +99,26 @@ class DistributionIndexProcessor extends IndexProcessor_1.IndexProcessor {
     }
     // TODO Move this to a util maybe
     static isForgeGradle3(mcVersion, forgeVersion) {
-        return true;
-        // if(mcVersionAtLeast('1.13', mcVersion)) {
-        //     return true
-        // }
-        // try {
-        //     const forgeVer = forgeVersion.split('-')[1]
-        //     const maxFG2 = [14, 23, 5, 2847]
-        //     const verSplit = forgeVer.split('.').map(v => Number(v))
-        //     for(let i=0; i<maxFG2.length; i++) {
-        //         if(verSplit[i] > maxFG2[i]) {
-        //             return true
-        //         } else if(verSplit[i] < maxFG2[i]) {
-        //             return false
-        //         }
-        //     }
-        //     return false
-        // } catch(err) {
-        //     throw new Error('Forge version is complex (changed).. launcher requires a patch.')
-        // }
+        if ((0, MojangUtils_1.mcVersionAtLeast)('1.13', mcVersion)) {
+            return true;
+        }
+        try {
+            const forgeVer = forgeVersion.split('-')[1];
+            const maxFG2 = [14, 23, 5, 2847];
+            const verSplit = forgeVer.split('.').map(v => Number(v));
+            for (let i = 0; i < maxFG2.length; i++) {
+                if (verSplit[i] > maxFG2[i]) {
+                    return true;
+                }
+                else if (verSplit[i] < maxFG2[i]) {
+                    return false;
+                }
+            }
+            return false;
+        }
+        catch (err) {
+            throw new Error('Forge version is complex (changed).. launcher requires a patch.');
+        }
     }
 }
 exports.DistributionIndexProcessor = DistributionIndexProcessor;
