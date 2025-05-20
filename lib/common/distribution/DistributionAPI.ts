@@ -113,14 +113,14 @@ export class DistributionAPI {
         try {
 
             const res = await got.get<Distribution>(this.remoteUrl, { responseType: 'json' })
-
+            
             return {
                 data: res.body,
                 responseStatus: RestResponseStatus.SUCCESS
             }
 
         } catch(error) {
-
+            console.log(error)
             return handleGotError('Pull Remote', error as RequestError, DistributionAPI.log, () => null)
 
         }

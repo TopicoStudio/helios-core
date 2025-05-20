@@ -103,6 +103,7 @@ class DistributionAPI {
             };
         }
         catch (error) {
+            console.log(error);
             return (0, RestResponse_1.handleGotError)('Pull Remote', error, DistributionAPI.log, () => null);
         }
     }
