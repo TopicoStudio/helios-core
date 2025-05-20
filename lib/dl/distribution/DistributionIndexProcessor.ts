@@ -75,7 +75,7 @@ export class DistributionIndexProcessor extends IndexProcessor {
             throw new AssetGuardError(`Invalid server id ${this.serverId}`)
         }
         console.log(server.modules)
-        const modLoaderModule = server.modules.find(({ rawModule: { type } }) => type === Type.ForgeHosted || type === Type.Forge || type === Type.Fabric)
+        const modLoaderModule = server.modules.find(({ rawModule: { type } }) => type === Type.ForgeHosted || type === Type.Forge || type === Type.Fabric || type === Type.Neoforge)
 
         if(modLoaderModule == null) {
             throw new AssetGuardError('No mod loader found!')
